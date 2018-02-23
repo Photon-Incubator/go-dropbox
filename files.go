@@ -405,6 +405,17 @@ func (c *Files) Download(in *DownloadInput) (out *DownloadOutput, err error) {
 	return
 }
 
+// Download a file.
+func (c *Files) DownloadZip(in *DownloadInput) (out *DownloadOutput, err error) {
+	body, l, err := c.download("/files/download_zip", in, nil)
+	if err != nil {
+		return
+	}
+
+	out = &DownloadOutput{body, l}
+	return
+}
+
 // ThumbnailFormat determines the format of the thumbnail.
 type ThumbnailFormat string
 

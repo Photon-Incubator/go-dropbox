@@ -1,7 +1,10 @@
 package dropbox
 
 import (
+	"context"
 	"net/http"
+
+	"google.golang.org/appengine/urlfetch"
 )
 
 // Config for the Dropbox clients.
@@ -11,9 +14,9 @@ type Config struct {
 }
 
 // NewConfig with the given access token.
-func NewConfig(accessToken string) *Config {
+func NewConfig(ctx context.Context, accessToken string) *Config {
 	return &Config{
-		HTTPClient:  http.DefaultClient,
+		HTTPClient:  urlfetch.Client(ctx),
 		AccessToken: accessToken,
 	}
 }
